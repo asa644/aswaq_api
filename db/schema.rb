@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170407125225) do
+ActiveRecord::Schema.define(version: 20170407131226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,17 +29,17 @@ ActiveRecord::Schema.define(version: 20170407125225) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
   end
 
-  create_table "items", force: :cascade do |t|
+  create_table "items", primary_key: "itemId", id: :integer, default: -> { "nextval('items_id_seq'::regclass)" }, force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "size"
-    t.string   "model"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "itemSize"
+    t.string   "itemModel"
     t.string   "color"
-    t.integer  "stockqty"
-    t.float    "price"
-    t.string   "description"
-    t.string   "photo"
+    t.integer  "itemStockqty"
+    t.float    "itemPrice"
+    t.string   "itemDescription"
+    t.string   "itemPhoto"
     t.index ["user_id"], name: "index_items_on_user_id", using: :btree
   end
 
