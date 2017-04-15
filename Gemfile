@@ -11,17 +11,23 @@ gem 'redis'
 gem 'pundit'
 gem 'cloudinary'
 gem 'carrierwave', '~> 0.11.2'
+gem 'remotipart', github: 'mshibuya/remotipart'
+gem 'rails_admin', '>= 1.0.0.rc'
 
 gem 'sass-rails'
-gem 'jquery-rails'
 gem 'uglifier'
 gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
 gem "simple_token_authentication"
-gem 'activeadmin', github: 'activeadmin/activeadmin'
-gem 'inherited_resources', github: 'activeadmin/inherited_resources'
+group :development, :test do
+  gem 'capybara'
+  gem 'poltergeist'
+  gem 'launchy'
+  gem 'minitest-reporters'
+  # [...]
+end
 
 group :development, :test do
   gem 'binding_of_caller'

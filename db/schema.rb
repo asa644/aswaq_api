@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170407131226) do
+ActiveRecord::Schema.define(version: 20170415110744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,18 +29,90 @@ ActiveRecord::Schema.define(version: 20170407131226) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
   end
 
-  create_table "items", primary_key: "itemId", id: :integer, default: -> { "nextval('items_id_seq'::regclass)" }, force: :cascade do |t|
+  create_table "availables", force: :cascade do |t|
+    t.integer  "item_id"
+    t.integer  "branch_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["branch_id"], name: "index_availables_on_branch_id", using: :btree
+    t.index ["item_id"], name: "index_availables_on_item_id", using: :btree
+  end
+
+  create_table "belongs", force: :cascade do |t|
+    t.integer  "item_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["category_id"], name: "index_belongs_on_category_id", using: :btree
+    t.index ["item_id"], name: "index_belongs_on_item_id", using: :btree
+  end
+
+  create_table "billing_infos", force: :cascade do |t|
+    t.string   "BillingInfoCardNumber", limit: 16
+    t.string   "BillingInfoCvv",        limit: 3
+    t.string   "BillingInfoBankName",   limit: 100
+    t.string   "BillingInfoBankBranch", limit: 200
+    t.integer  "user_id"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.index ["user_id"], name: "index_billing_infos_on_user_id", using: :btree
+  end
+
+  create_table "branches", force: :cascade do |t|
+    t.string   "branchName"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "categoryName"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "has_items", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_has_items_on_item_id", using: :btree
+    t.index ["order_id"], name: "index_has_items_on_order_id", using: :btree
+  end
+
+  create_table "items", force: :cascade do |t|
     t.integer  "user_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "itemSize"
     t.string   "itemModel"
-    t.string   "color"
+    t.string   "itemColor"
     t.integer  "itemStockqty"
     t.float    "itemPrice"
     t.string   "itemDescription"
     t.string   "itemPhoto"
+    t.integer  "branch_id"
+    t.index ["branch_id"], name: "index_items_on_branch_id", using: :btree
     t.index ["user_id"], name: "index_items_on_user_id", using: :btree
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "orderStatus",  default: 0
+    t.float    "orderInvoice"
+    t.integer  "user_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.float    "paymentAmount"
+    t.integer  "paymentType",     default: 0
+    t.integer  "billing_info_id"
+    t.integer  "order_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["billing_info_id"], name: "index_payments_on_billing_info_id", using: :btree
+    t.index ["order_id"], name: "index_payments_on_order_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -63,5 +135,16 @@ ActiveRecord::Schema.define(version: 20170407131226) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "availables", "branches"
+  add_foreign_key "availables", "items"
+  add_foreign_key "belongs", "categories"
+  add_foreign_key "belongs", "items"
+  add_foreign_key "billing_infos", "users"
+  add_foreign_key "has_items", "items"
+  add_foreign_key "has_items", "orders"
+  add_foreign_key "items", "branches"
   add_foreign_key "items", "users"
+  add_foreign_key "orders", "users"
+  add_foreign_key "payments", "billing_infos"
+  add_foreign_key "payments", "orders"
 end

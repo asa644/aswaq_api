@@ -7,5 +7,6 @@ class FixItemColumnsName < ActiveRecord::Migration[5.0]
     rename_column :items, :stockqty, :itemStockqty
     rename_column :items, :price, :itemPrice
     rename_column :items, :photo, :itemPhoto
+
   end
 end

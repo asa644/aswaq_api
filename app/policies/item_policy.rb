@@ -8,3 +8,4 @@ class ItemPolicy < ApplicationPolicy
     true  # Anyone can create a place
   end
 end
+

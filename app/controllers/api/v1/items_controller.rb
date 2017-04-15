@@ -10,6 +10,7 @@ class Api::V1::ItemsController < Api::V1::BaseController
   def create
     @item = Item.new(item_params)
     @item.user = current_user
+    # @branch = Branch.find(params[:branch_id])
     authorize @item
     if @item.save
       render json: { created: 'success', item: @item }, status: :created
@@ -19,8 +20,11 @@ class Api::V1::ItemsController < Api::V1::BaseController
   end
 
   def show
+        # @branch = Branch.find(params[:branch_id])
+
   end
   def update
+        # @branch = Branch.find(params[:branch_id])
     if @item.update(item_params)
       render :show
     else
@@ -28,6 +32,8 @@ class Api::V1::ItemsController < Api::V1::BaseController
     end
   end
   def destroy
+        # @branch = Branch.find(params[:branch_id])
+
     @item.destroy
     head :no_content
     # No need to create a `destroy.json.jbuilder` view
@@ -35,7 +41,7 @@ class Api::V1::ItemsController < Api::V1::BaseController
 
   private
   def item_params
-    params.require(:item).permit(:description, :model, :size, :color, :stockqty, :price)
+    params.require(:item).permit(:branch_id, :itemDescription, :itemModel, :itemSize, :itemColor, :itemStockqty, :itemPrice)
   end
 
 

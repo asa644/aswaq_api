@@ -7,11 +7,3 @@
 #   Character.create(name 'Luke', movie movies.first)
 # user = User.find_by_email("ahmad.msouti@hotmail.com")
 
-firstItem = Item.new(description: "this is a fantastic shirt", model: "new model", size: "Large", color: "Black", stockqty: 3, price: 1.5, user_id: 1)
-firstItem.save
-second = Item.new(description: "this is a fantastic skirt", model: "new skirt", size: "petite", color: "orange", stockqty: 5, price: 100.5, user_id: 1)
-second.save
-third = Item.new(description: "this is a fantastic pants", model: "new something", size: "huge", color: "brown", stockqty: 3, price: 1.5, user_id: 1)
-third.save
-
-
