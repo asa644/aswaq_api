@@ -43,7 +43,7 @@ class Api::V1::ItemsController < Api::V1::BaseController
 
   private
   def item_params
-    params.require(:item).permit(:branch_id, :itemDescription, :itemModel, :itemSize, :itemColor, :itemStockqty, :itemPrice)
+    params.permit(:branch_id, :category_id, :itemDescription, :itemModel, :itemSize, :itemColor, :itemStockqty, :itemPrice)
   end
 
 

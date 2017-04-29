@@ -36,7 +36,7 @@ class Api::V1::BranchesController < Api::V1::BaseController
 
   private
   def branch_params
-    params.require(:branch).permit(:branchName)
+    params.permit(:branchName)
   end
 
 
