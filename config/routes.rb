@@ -9,7 +9,12 @@ Rails.application.routes.draw do
       resources :branches, only: [ :index, :show, :update, :create, :delete ]
       resources :orders, only: [ :index, :show, :update, :create, :delete ]
       resources :billing_infos, only: [ :index, :show, :update, :create, :delete ]
+      devise_scope :user do
+        post 'sessions' => 'sessions#create', :as => 'login'
+        delete 'sessions' => 'sessions#destroy', :as => 'logout'
+        post 'registrations' => 'registrations#create', :as => 'register'
 
+      end
     end
   end
 end
