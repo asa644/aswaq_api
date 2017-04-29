@@ -1,12 +1,14 @@
 class Api::V1::ItemsController < Api::V1::BaseController
-  acts_as_token_authentication_handler_for User, except: [ :index, :show ]
+  acts_as_token_authentication_handler_for User, except: [ :index, :show, :color ]
 
   before_action :set_item, only: [ :show, :update, :destroy ]
 
   def index
-    @items = policy_scope(Item)
+    @items = policy_scope(Item).where(itemColor: :color)
   end
-
+  def color
+    @items = policy_scope(Item).where(itemColor: :color)
+  end
   def create
     @item = Item.new(item_params)
     @item.user = current_user
