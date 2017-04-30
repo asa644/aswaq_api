@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       resources :categories, only: [ :index, :show, :update, :create, :delete ]
       resources :branches, only: [ :index, :show, :update, :create, :delete ]
       resources :orders, only: [ :index, :show, :update, :create, :delete ]
+      resources :colors, only: [ :index, :show, :update, :create, :delete ]
+
       resources :billing_infos, only: [ :index, :show, :update, :create, :delete ]
       get '/search' => 'items#search'
       get '/list' => 'items#list'

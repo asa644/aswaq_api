@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170429230232) do
+ActiveRecord::Schema.define(version: 20170430014759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,21 @@ ActiveRecord::Schema.define(version: 20170429230232) do
     t.datetime "updated_at",   null: false
   end
 
+  create_table "color_items", force: :cascade do |t|
+    t.integer  "color_id"
+    t.integer  "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["color_id"], name: "index_color_items_on_color_id", using: :btree
+    t.index ["item_id"], name: "index_color_items_on_item_id", using: :btree
+  end
+
+  create_table "colors", force: :cascade do |t|
+    t.string   "colorvalue"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "has_items", force: :cascade do |t|
     t.integer  "order_id"
     t.integer  "item_id"
@@ -85,7 +100,6 @@ ActiveRecord::Schema.define(version: 20170429230232) do
     t.datetime "updated_at",      null: false
     t.string   "itemsize"
     t.string   "itemmodel"
-    t.string   "itemcolor"
     t.integer  "itemstockqty"
     t.float    "itemprice"
     t.string   "itemdescription"
@@ -140,6 +154,8 @@ ActiveRecord::Schema.define(version: 20170429230232) do
   add_foreign_key "belongs", "categories"
   add_foreign_key "belongs", "items"
   add_foreign_key "billing_infos", "users"
+  add_foreign_key "color_items", "colors"
+  add_foreign_key "color_items", "items"
   add_foreign_key "has_items", "items"
   add_foreign_key "has_items", "orders"
   add_foreign_key "items", "branches"

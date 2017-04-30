@@ -7,6 +7,8 @@ class Item < ApplicationRecord
   has_many :branches, through: :available
   has_many :has_items
   has_many :orders, through: :has_items
+  has_many :color_item
+  has_many :colors, through: :color_item
 
   mount_uploader :itemPhoto, PhotoUploader
 end
