@@ -15,7 +15,7 @@ class Api::V1::ItemsController < Api::V1::BaseController
       @items = Item.where("#{params[:search]} #{params[:sign]} ?", params[:value])
       end
     else
-    @items = policy_scope(Item).order(params[:search] => :asc)
+    @items = policy_scope(Item).order(params[:search] => params[:AD])
     end
   end
   def list
