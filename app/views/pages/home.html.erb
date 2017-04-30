@@ -1,3 +1,9 @@
+<br><br><br>
+<strong> Download Json view for chrome</strong>
+
+<div class="container">
+<br>
+ Filter by one attribute and date format: (mm/dd/yyyy)
   <div class="navbar-wagon-right">
   <!-- Right Navigation -->
     <form action="api/v1/search" class="navbar-wagon-search">
@@ -31,5 +37,53 @@
       </button>
     </form>
 </div>
+<br><br><br>
+if you want to SORT only (Ascending)
+  <div class="navbar-wagon-right">
+  <!-- Right Navigation -->
+    <form action="api/v1/search" class="navbar-wagon-search">
+      <SELECT NAME="search" >
+         <OPTION VALUE="id" value="id"> id
+         <OPTION VALUE="itemprice" value="itemprice"> Price
+         <OPTION VALUE="itemcolor" value="itemcolor"> Color
+         <OPTION VALUE="itemsize" value="itemsize"> Size
+         <OPTION VALUE="itemmodel" value="itemmodel"> Model
+        <OPTION VALUE="created_at" value="created_at"> Date
+    </SELECT>
 
-Download JsonView
+
+      <button type="submit", value='search' class="btn btn-success">
+        <i class="fa fa-search"></i>
+      </button>
+    </form>
+</div>
+<br><br><br>
+Filter by only one attribute
+  <div class="navbar-wagon-right">
+  <!-- Right Navigation -->
+    <form action="api/v1/search" class="navbar-wagon-search">
+      <SELECT NAME="search" >
+         <OPTION VALUE="id" value="id"> id
+         <OPTION VALUE="itemprice" value="itemprice"> Price
+         <OPTION VALUE="itemcolor" value="itemcolor"> Color
+         <OPTION VALUE="itemsize" value="itemsize"> Size
+         <OPTION VALUE="itemmodel" value="itemmodel"> Model
+        <OPTION VALUE="created_at" value="created_at"> Date
+
+    </SELECT>
+    <SELECT NAME="sign">
+       <OPTION VALUE="=" value="="> =
+       <OPTION VALUE="<=" value="<="> <=
+       <OPTION VALUE=">=" value=">="> >=
+        <OPTION VALUE=">" value=">="> >
+       <OPTION VALUE="<" value=">="> <
+    </SELECT>
+
+      <input type="text" name='value' class="navbar-wagon-search-input" placeholder="value">
+      <button type="submit", value='search' class="btn btn-success">
+        <i class="fa fa-search"></i>
+      </button>
+    </form>
+</div>
+
+</div>

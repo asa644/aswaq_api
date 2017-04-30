@@ -8,8 +8,12 @@ class Api::V1::ItemsController < Api::V1::BaseController
   end
   def search
     skip_authorization
-    if params[:value] != ''
+    if params[:value] != nil
+      if params[:date]!= nil
       @items = Item.where("#{params[:search]} #{params[:sign]} ? AND created_at #{params[:datesign]} ?", params[:value], params[:date])
+      else
+      @items = Item.where("#{params[:search]} #{params[:sign]} ?", params[:value])
+      end
     else
     @items = policy_scope(Item).order(params[:search] => :asc)
     end
