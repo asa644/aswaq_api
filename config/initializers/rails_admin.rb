@@ -29,6 +29,7 @@ RailsAdmin.config do |config|
   configure :colorvalue, :color
 end
 
+
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory

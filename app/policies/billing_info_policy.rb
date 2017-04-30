@@ -4,4 +4,8 @@ class BillingInfoPolicy < ApplicationPolicy
       scope.all
     end
   end
+  def create?
+    true  # Anyone can create a place
+  end
+
 end

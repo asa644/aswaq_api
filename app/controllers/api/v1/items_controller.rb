@@ -20,8 +20,9 @@ class Api::V1::ItemsController < Api::V1::BaseController
   end
   def list
     skip_authorization
-    @users = User.all
+    @users = User.joins(:orders).where.has {orders.orderStatus == 'pending' }
   end
+
   def create
     @item = Item.new(item_params)
     @item.user = current_user

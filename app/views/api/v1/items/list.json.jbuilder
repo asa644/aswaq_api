@@ -1,3 +1,5 @@
 json.array! @users do |user|
-  json.extract! user, :id, :email, :orders
+  json.array! user.orders do |order|
+    json.extract! order, :orderStatus
+end
 end

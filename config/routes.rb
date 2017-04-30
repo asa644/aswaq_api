@@ -9,10 +9,14 @@ Rails.application.routes.draw do
       resources :branches, only: [ :index, :show, :update, :create, :delete ]
       resources :orders, only: [ :index, :show, :update, :create, :delete ]
       resources :colors, only: [ :index, :show, :update, :create, :delete ]
+      resources :users, only: [ :index, :show]
+      resources :payments, only: [ :index, :show, :update, :create, :delete ]
+
+      get "billing/:id", to: "users#billing"
 
       resources :billing_infos, only: [ :index, :show, :update, :create, :delete ]
       get '/search' => 'items#search'
-      get '/list' => 'items#list'
+      get '/list' => 'user#list'
 
       devise_scope :user do
         post 'sessions' => 'sessions#create', :as => 'login'

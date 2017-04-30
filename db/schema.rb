@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170430014759) do
+ActiveRecord::Schema.define(version: 20170430222719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,11 +50,10 @@ ActiveRecord::Schema.define(version: 20170430014759) do
   create_table "billing_infos", force: :cascade do |t|
     t.string   "BillingInfoCardNumber", limit: 16
     t.string   "BillingInfoCvv",        limit: 3
-    t.string   "BillingInfoBankName",   limit: 100
-    t.string   "BillingInfoBankBranch", limit: 200
     t.integer  "user_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.string   "billingInfoExp"
     t.index ["user_id"], name: "index_billing_infos_on_user_id", using: :btree
   end
 
@@ -106,6 +105,7 @@ ActiveRecord::Schema.define(version: 20170430014759) do
     t.string   "itemPhoto"
     t.integer  "branch_id"
     t.index ["branch_id"], name: "index_items_on_branch_id", using: :btree
+    t.index ["created_at", "itemprice", "itemsize"], name: "index_items_on_created_at_and_itemprice_and_itemsize", using: :btree
     t.index ["user_id"], name: "index_items_on_user_id", using: :btree
   end
 
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 20170430014759) do
     t.integer  "user_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.index ["orderStatus"], name: "index_orders_on_orderStatus", using: :btree
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 

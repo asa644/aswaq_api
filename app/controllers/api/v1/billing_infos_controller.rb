@@ -8,7 +8,6 @@ class Api::V1::BillingInfosController < Api::V1::BaseController
 
   def create
     @billingInfo = BillingInfo.new(billingInfo_params)
-    # @billingInfo = billingInfo.find(params[:billingInfo_id])
     authorize @billingInfo
     if @billingInfo.save
       render json: { created: 'success', billingInfo: @billingInfo }, status: :created
@@ -36,7 +35,7 @@ class Api::V1::BillingInfosController < Api::V1::BaseController
 
   private
   def billingInfo_params
-    params.permit(:BillingInfoCardNumber, :BillingInfoCvv, :BillingInfoBankName, :BillingInfoBankBranch, :user_id)
+    params.permit(:user_id, :BillingInfoCardNumber, :BillingInfoCvv, :BillingInfoExp)
   end
 
 
