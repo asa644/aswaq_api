@@ -18,9 +18,9 @@ class Api::V1::ItemsController < Api::V1::BaseController
     @items = policy_scope(Item).order(params[:search] => :asc)
     end
   end
-  def price
+  def list
     skip_authorization
-    @items = policy_scope(Item).where(params[:itemPrice] <= params[:search])
+    @users = User.all
   end
   def create
     @item = Item.new(item_params)

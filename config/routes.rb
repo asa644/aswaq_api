@@ -10,6 +10,8 @@ Rails.application.routes.draw do
       resources :orders, only: [ :index, :show, :update, :create, :delete ]
       resources :billing_infos, only: [ :index, :show, :update, :create, :delete ]
       get '/search' => 'items#search'
+      get '/list' => 'items#list'
+
       devise_scope :user do
         post 'sessions' => 'sessions#create', :as => 'login'
         delete 'sessions' => 'sessions#destroy', :as => 'logout'
