@@ -1,0 +1,31 @@
+  <div class="navbar-wagon-right">
+  <!-- Right Navigation -->
+    <form action="api/v1/search" class="navbar-wagon-search">
+      <SELECT NAME="search" >
+         <OPTION VALUE="id" value="id"> id
+         <OPTION VALUE="itemprice" value="itemprice"> Price
+         <OPTION VALUE="itemcolor" value="itemcolor"> Color
+         <OPTION VALUE="itemsize" value="itemsize"> Size
+         <OPTION VALUE="itemmodel" value="itemmodel"> Model
+        <OPTION VALUE="created_at" value="created_at"> Date
+
+    </SELECT>
+    <SELECT NAME="sign">
+       <OPTION VALUE="=" value="="> =
+       <OPTION VALUE="<=" value="<="> <=
+       <OPTION VALUE=">=" value=">="> >=
+        <OPTION VALUE=">" value=">="> >
+       <OPTION VALUE="<" value=">="> <
+    </SELECT>
+
+      <input type="text" name='value' class="navbar-wagon-search-input" placeholder="value">
+
+      <input type="date" name="date">
+
+      <button type="submit", value='search' class="btn btn-success">
+        <i class="fa fa-search"></i>
+      </button>
+    </form>
+</div>
+
+Download JsonView

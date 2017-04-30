@@ -1,13 +1,26 @@
 class Api::V1::ItemsController < Api::V1::BaseController
-  acts_as_token_authentication_handler_for User, except: [ :index, :show, :color ]
+  acts_as_token_authentication_handler_for User, except: [ :index, :show, :search ]
 
   before_action :set_item, only: [ :show, :update, :destroy ]
 
   def index
-    @items = policy_scope(Item).where(itemColor: :color)
+    @items = policy_scope(Item).order(:created_at => :desc)
   end
-  def color
-    @items = policy_scope(Item).where(itemColor: :color)
+  def search
+    skip_authorization
+    if params[:value] != ''
+      if params[:search] == 'created_at'
+      @items = Item.where("#{params[:search]} #{params[:sign]} ?", params[:date])
+      else
+      @items = Item.where("#{params[:search]} #{params[:sign]} ?", params[:value])
+      end
+    else
+    @items = policy_scope(Item).order(params[:search] => :asc)
+    end
+  end
+  def price
+    skip_authorization
+    @items = policy_scope(Item).where(params[:itemPrice] <= params[:search])
   end
   def create
     @item = Item.new(item_params)
@@ -43,7 +56,7 @@ class Api::V1::ItemsController < Api::V1::BaseController
 
   private
   def item_params
-    params.permit(:branch_id, :category_id, :itemDescription, :itemModel, :itemSize, :itemColor, :itemStockqty, :itemPrice)
+    params.permit(:branch_id, :categories, :itemdescription, :itemPhoto, :photo_cache, :itemmodel, :itemsize, :itemcolor, :itemstockqty, :itemprice)
   end
 
 

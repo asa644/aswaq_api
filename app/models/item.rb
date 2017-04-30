@@ -8,5 +8,5 @@ class Item < ApplicationRecord
   has_many :has_items
   has_many :orders, through: :has_items
 
-  mount_uploader :photo, PhotoUploader
+  mount_uploader :itemPhoto, PhotoUploader
 end

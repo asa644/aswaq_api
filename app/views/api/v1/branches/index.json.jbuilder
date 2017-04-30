@@ -1,3 +1,3 @@
 json.array! @branches do |branch|
-  json.extract! branch, :id, :branchName, :items
+  json.extract! branch, :id, :branchName
 end

@@ -13,7 +13,7 @@ gem 'cloudinary'
 gem 'carrierwave', '~> 0.11.2'
 gem 'remotipart', github: 'mshibuya/remotipart'
 gem 'rails_admin', '>= 1.0.0.rc'
-
+gem 'baby_squeel'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'bootstrap-sass'
@@ -21,6 +21,9 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
 gem "simple_token_authentication"
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
+
 group :development, :test do
   gem 'capybara'
   gem 'poltergeist'
