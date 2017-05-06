@@ -6,22 +6,20 @@ class Api::V1::OrdersController < Api::V1::BaseController
   def index
     @orders = policy_scope(Order)
   end
-  # def show
-  #   order_ids = $redis.smembers current_user_order
-  #   @cart_items = Item.find(order_ids)
-  # end
+  def show
 
-  # def add
-  #   $redis.sadd current_user_order, params[:item_id]
-  #   render json: current_user.order_count, status: 200
-  # end
+  end
+  def add
+    item = Item.find(params[:item_id])
+    user = User.find(params[:user_id])
+    user.orders.first.items << item
+  end
 
-  # def remove
-  #   $redis.srem current_user_order, params[:movie_id]
-  #   render json: current_user.cart_count, status: 200
-  # end
-
-
+  def remove
+    item = Item.find(params[:item_id])
+    user = User.find(params[:user_id])
+    user.orders.first.has_items.where(item_id: params[:item_id]).destroy_all
+  end
   def create
     @order = Order.new(order_params)
     @order.user = current_user
