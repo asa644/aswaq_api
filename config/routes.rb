@@ -7,7 +7,12 @@ Rails.application.routes.draw do
       resources :items, only: [ :index, :show, :update, :create, :delete ]
       resources :categories, only: [ :index, :show, :update, :create, :delete ]
       resources :branches, only: [ :index, :show, :update, :create, :delete ]
-      resources :orders, only: [ :index, :show, :update, :create, :delete ]
+      # resources :orders, only: [ :index, :show, :update, :create, :delete ]
+      resource :orders, only: [:show] do
+        put 'add/:item_id', to: 'carts#add', as: :add_to
+        put 'remove/:item_id', to: 'carts#remove', as: :remove_from
+      end
+
       resources :colors, only: [ :index, :show, :update, :create, :delete ]
       resources :users, only: [ :index, :show]
       resources :payments, only: [ :index, :show, :update, :create, :delete ]

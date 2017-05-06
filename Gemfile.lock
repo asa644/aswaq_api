@@ -116,6 +116,7 @@ GEM
       activesupport (>= 4.2.0)
     haml (4.0.7)
       tilt
+    hiredis (0.6.1)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (0.8.1)
@@ -298,6 +299,7 @@ DEPENDENCIES
   devise
   figaro
   font-awesome-sass
+  hiredis
   jbuilder
   launchy
   listen (~> 3.0.5)

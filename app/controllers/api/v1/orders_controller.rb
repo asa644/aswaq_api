@@ -1,10 +1,26 @@
 class Api::V1::OrdersController < Api::V1::BaseController
-
+  acts_as_token_authentication_handler_for User, except: [ :index, :show ]
   before_action :set_order, only: [ :show, :update, :destroy ]
+  before_action :authenticate_user!
 
   def index
     @orders = policy_scope(Order)
   end
+  # def show
+  #   order_ids = $redis.smembers current_user_order
+  #   @cart_items = Item.find(order_ids)
+  # end
+
+  # def add
+  #   $redis.sadd current_user_order, params[:item_id]
+  #   render json: current_user.order_count, status: 200
+  # end
+
+  # def remove
+  #   $redis.srem current_user_order, params[:movie_id]
+  #   render json: current_user.cart_count, status: 200
+  # end
+
 
   def create
     @order = Order.new(order_params)
@@ -21,12 +37,8 @@ class Api::V1::OrdersController < Api::V1::BaseController
     end
   end
 
-  def show
-        # @branch = Branch.find(params[:branch_id])
-
-  end
   def update
-        # @branch = Branch.find(params[:branch_id])
+
     if @order.update(order_params)
       render :show
     else
@@ -43,8 +55,13 @@ class Api::V1::OrdersController < Api::V1::BaseController
 
   private
   def order_params
-    params.require(:order).permit(:orderStatus, :orderInvoice)
+    params.require(:order).permit(:orderStatus, :orderInvoice, :items, :user)
   end
+
+  def current_user_order
+    "order#{current_user.id}"
+  end
+
 
   def render_error
     render json: { errors: @order.errors.full_messages },

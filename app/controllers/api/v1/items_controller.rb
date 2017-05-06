@@ -23,6 +23,15 @@ class Api::V1::ItemsController < Api::V1::BaseController
     @users = User.joins(:orders).where.has {orders.orderStatus == 'pending' }
   end
 
+  # def check
+  #   @item = Item.find(params[:id])
+  #   if @item is in @user.order
+  #     @user.order.items.where(item: @item).destroy
+  #   else
+  #     @user.order.items.create!(@item)
+  #     add item to the order
+  #   end
+  # end
   def create
     @item = Item.new(item_params)
     @item.user = current_user
