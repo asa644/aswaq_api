@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170506080008) do
+ActiveRecord::Schema.define(version: 20170506112952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,8 +95,8 @@ ActiveRecord::Schema.define(version: 20170506080008) do
 
   create_table "items", force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "itemsize"
     t.string   "itemmodel"
     t.integer  "itemstockqty"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 20170506080008) do
     t.string   "itemdescription"
     t.string   "itemPhoto"
     t.integer  "branch_id"
+    t.boolean  "inOrder",         default: false, null: false
     t.index ["branch_id"], name: "index_items_on_branch_id", using: :btree
     t.index ["created_at", "itemprice", "itemsize"], name: "index_items_on_created_at_and_itemprice_and_itemsize", using: :btree
     t.index ["user_id"], name: "index_items_on_user_id", using: :btree

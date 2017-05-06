@@ -9,6 +9,9 @@ class Api::V1::OrdersController < Api::V1::BaseController
   def create
     @order = Order.new(order_params)
     @order.user = current_user
+    @order.items.each do |item|
+      item.update(inOrder: true)
+    end
     # @branch = Branch.find(params[:branch_id])
     authorize @order
     if @order.save

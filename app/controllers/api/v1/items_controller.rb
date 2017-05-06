@@ -49,7 +49,6 @@ class Api::V1::ItemsController < Api::V1::BaseController
   end
   def destroy
         # @branch = Branch.find(params[:branch_id])
-
     @item.destroy
     head :no_content
     # No need to create a `destroy.json.jbuilder` view
