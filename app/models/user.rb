@@ -3,8 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   after_create :setbag
   acts_as_token_authenticatable
-  has_many :billing_infos
-  has_many :orders
+  has_many :billing_infos, dependent: :destroy
+  has_many :orders, dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
