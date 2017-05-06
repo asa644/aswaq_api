@@ -1,1 +1,2 @@
-  json.extract! @category, :id, :categoryName, :items
+  json.extract! @category, :items
+

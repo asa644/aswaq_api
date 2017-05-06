@@ -10,6 +10,11 @@ class Api::V1::SessionsController < Devise::SessionsController
            :json => { :success => true,
                       :info => "Logged in",
                       :data => { :email => current_user.email,
+                        :first_name => current_user.first_name,
+                        :last_name => current_user.last_name,
+                        # :useraddress => current_user.address,
+
+                        :email => current_user.email,
                         :auth_token => current_user.authentication_token } }
   end
 
