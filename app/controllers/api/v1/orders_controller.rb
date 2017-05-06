@@ -35,6 +35,10 @@ class Api::V1::OrdersController < Api::V1::BaseController
       render_error
     end
   end
+  def check
+    boo = HasItem.where(order_id: params[:order_id], item_id: params[:item_id]).empty?
+    render json: { inOrder?: !boo }
+  end
 
   def update
 
