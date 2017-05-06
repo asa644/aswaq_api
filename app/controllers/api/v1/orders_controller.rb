@@ -13,7 +13,7 @@ class Api::V1::OrdersController < Api::V1::BaseController
     item = Item.find(params[:item_id])
     user = User.find(params[:user_id])
     user.orders.first.items << item
-    render json: { created: 'success'}, status: :created
+    render json: { created: true}, status: :created
   end
 
   def remove
