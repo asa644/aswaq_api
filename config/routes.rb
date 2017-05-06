@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       #   put 'add/:item_id', to: 'orders#add', as: :add_to
       #   put 'remove/:item_id', to: 'orders#remove', as: :remove_from
       # end
-
+      resources :has_items, only: [ :index, :show, :update, :create, :delete ]
       resources :colors, only: [ :index, :show, :update, :create, :delete ]
       resources :users, only: [ :index, :show]
       resources :payments, only: [ :index, :show, :update, :create, :delete ]
