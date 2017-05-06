@@ -7,7 +7,8 @@ class Api::V1::HasItemsController < Api::V1::BaseController
   end
 
   def create
-    @HasItem = HasItem.new(HasItem_params)
+    @HasItem = HasItem.find(HasItem_params)
+    Order.where(item_id: params[:item_id], user_id: params[:user_id])
     @HasItem.update(order_id: current_user.order.id)
     @HasItem.order_id = current_user.order.id
     authorize @HasItem
@@ -19,6 +20,7 @@ class Api::V1::HasItemsController < Api::V1::BaseController
   end
 
   def show
+    Order.where(item_id: params[:item_id], user_id: params[:user_id])
   end
   def update
     if @HasItem.update(HasItem_params)
@@ -37,7 +39,7 @@ class Api::V1::HasItemsController < Api::V1::BaseController
 
   private
   def HasItem_params
-    params.permit(:item_id, :quantity, :color)
+    params.permit(:item_id, :quantity, :color, :user_id)
   end
 
 
