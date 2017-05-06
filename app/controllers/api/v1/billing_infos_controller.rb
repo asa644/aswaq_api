@@ -35,7 +35,7 @@ class Api::V1::BillingInfosController < Api::V1::BaseController
 
   private
   def billingInfo_params
-    params.permit(:user_id, :BillingInfoCardNumber, :BillingInfoCvv, :BillingInfoExp)
+    params.permit(:user_id, :BillingInfoCardNumber, :BillingInfoCvv, :billingInfoExp)
   end
 
 

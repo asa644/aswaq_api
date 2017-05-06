@@ -3,12 +3,13 @@ class Api::V1::HasItemsController < Api::V1::BaseController
   before_action :set_HasItem, only: [ :show, :update, :destroy ]
 
   def index
-    @billing_infos = policy_scope(HasItem)
+    @hasitems = HasItem.all
   end
 
   def create
     @HasItem = HasItem.new(HasItem_params)
-    @HasItem.order = current_user.order
+    @HasItem.update(order_id: current_user.order.id)
+    @HasItem.order_id = current_user.order.id
     authorize @HasItem
     if @HasItem.save
       render json: { created: 'success', HasItem: @HasItem }, status: :created
