@@ -1,7 +1,7 @@
 class Api::V1::OrdersController < Api::V1::BaseController
-  acts_as_token_authentication_handler_for User, except: [ :index, :show ]
+  # acts_as_token_authentication_handler_for User, except: [ :index, :show ]
   before_action :set_order, only: [ :show, :update, :destroy ]
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   def index
     @orders = policy_scope(Order)
@@ -13,6 +13,7 @@ class Api::V1::OrdersController < Api::V1::BaseController
     item = Item.find(params[:item_id])
     user = User.find(params[:user_id])
     user.orders.first.items << item
+    render json: { created: 'success'}, status: :created
   end
 
   def remove
