@@ -1,0 +1,2 @@
+class UserBillingInfo < ApplicationRecord
+end

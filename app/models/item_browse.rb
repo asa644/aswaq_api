@@ -1,0 +1,2 @@
+class ItemBrowse < ApplicationRecord
+end

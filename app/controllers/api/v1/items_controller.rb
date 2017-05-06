@@ -4,7 +4,8 @@ class Api::V1::ItemsController < Api::V1::BaseController
   before_action :set_item, only: [ :show, :update, :destroy ]
 
   def index
-    @items = policy_scope(Item).order(:created_at => :desc)
+    # @items = policy_scope(Item).order(:created_at => :desc)
+    @items = :search_result
   end
   def search
     skip_authorization
