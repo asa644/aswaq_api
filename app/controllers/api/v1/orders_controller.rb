@@ -13,9 +13,9 @@ class Api::V1::OrdersController < Api::V1::BaseController
     @user = User.find(params[:user_id])
     order = @user.orders.first
     @cart = OrderItem.where(order_id: order.id)
-    if @cart.empty?
-      render json: [{ created: 'mickymouse'}], status: :created
-    end
+    # if @cart.empty?
+    #   render json: [{ created: 'mickymouse'}], status: :created
+    # end
   end
 
   def add
