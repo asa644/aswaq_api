@@ -11,8 +11,11 @@ class Api::V1::OrdersController < Api::V1::BaseController
   end
     def cart
     @user = User.find(params[:user_id])
-    order = @user.orders.where.has {orderStatus == 'pending'}.first
-    @cart = OrderItem.all.where(order_id: order.id)
+    order = @user.orders.first
+    @cart = OrderItem.where(order_id: order.id)
+    if @cart.empty?
+      render json: { created: 'no items added to your bag', failed: false}, status: :created
+    end
   end
 
   def add
