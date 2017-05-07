@@ -20,10 +20,18 @@ class Api::V1::OrdersController < Api::V1::BaseController
     user = User.find(params[:user_id])
     color = params[:color]
     quantity = params[:quantity]
-    user.orders.first.items << item
-    s = HasItem.where(item_id: params[:item_id], order_id: user.orders.first.id).first
-      s.update(quantity: params[:quantity], color: params[:color])
-      render json: { created: true}, status: :created
+    if quantity.to_i > item.itemstockqty
+      render json: { failed: 'ITEM QUANTITY SHOULD NOT BE MORE THAN ITEM STOCKQTY'}, status: :failed
+    else
+      user.orders.first.items << item
+      price = user.orders.first.orderInvoice + item.itemprice
+      user.orders.first.update(orderInvoice: price)
+      # order = user.orders.first
+      # order.update(orderInvoice: order.orderInvoice+item.itemprice)
+      s = HasItem.where(item_id: params[:item_id], order_id: user.orders.first.id).first
+        s.update(quantity: params[:quantity], color: params[:color])
+        render json: { created: true}, status: :created
+    end
   end
 
   def remove

@@ -11,7 +11,7 @@ class User < ApplicationRecord
 
 private
   def setbag
-   order =  self.orders.create(:orderStatus => 'pending')
+   order =  self.orders.create(:orderStatus => 'pending', :orderInvoice => 0.0)
    order.save!
   end
 end
