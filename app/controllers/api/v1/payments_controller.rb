@@ -8,6 +8,7 @@ class Api::V1::PaymentsController < Api::V1::BaseController
 
   def create
     @payment = Payment.new(payment_params)
+    @order = @payment.order.where(id: params[:order_id])
     # @payment.user = current_user
     # @branch = Branch.find(params[:branch_id])
     authorize @payment
@@ -18,7 +19,10 @@ class Api::V1::PaymentsController < Api::V1::BaseController
     @payment.order.update(orderStatus: 'accepted')
     # insert new order
     @payment.update(paymentAmount: @payment.order.orderInvoice)
-
+    @payment.order.items.delete_all
+    @payment.order.items.save!
+      # @payment.order.has_items.where(order_id: @payment.order.id).destroy_all
+# post.paragraphs.delete(Paragraph.find(paragraph_id))
       render json: { created: 'success', payment: @payment }, status: :created
     else
      @payment.order.update(orderStatus: 'rejected')

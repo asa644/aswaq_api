@@ -21,7 +21,7 @@ class Api::V1::OrdersController < Api::V1::BaseController
     color = params[:color]
     quantity = params[:quantity]
     if quantity.to_i > item.itemstockqty
-      render json: { failed: "There are only #{item.itemstockqty} left in stock"}, status: :failed
+      render json: {created: false, failed: "There are only #{item.itemstockqty} left in stock"}, status: :failed
     else
       user.orders.first.items << item
       price = user.orders.first.orderInvoice + item.itemprice
@@ -33,10 +33,8 @@ class Api::V1::OrdersController < Api::V1::BaseController
       # order.update(orderInvoice: order.orderInvoice+item.itemprice)
       # s = HasItem.where(item_id: params[:item_id], order_id: user.orders.first.id).first
       #   s.update(quantity: params[:quantity], color: params[:color])
-        render json: { created: true}, status: :created
+        render json: { created: true, failed: false}, status: :created
     end
-
-
   end
 
   def remove

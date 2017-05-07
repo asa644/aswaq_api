@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
   root to: 'pages#home'
-  # get 'check/:user_id/:item_id/:color/:quantity' => 'pages#check'
+  # get 'check/:order_id' => 'pages#check'
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :items, only: [ :index, :show, :update, :create, :delete ]
