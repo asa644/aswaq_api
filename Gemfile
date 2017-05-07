@@ -9,6 +9,7 @@ gem 'jbuilder'
 gem 'devise'
 gem 'redis'
 gem 'hiredis'
+gem 'scenic', '~> 1.1'
 
 gem 'pundit'
 gem 'cloudinary'

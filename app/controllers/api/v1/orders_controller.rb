@@ -9,6 +9,13 @@ class Api::V1::OrdersController < Api::V1::BaseController
   def show
 
   end
+    def cart
+    @user = User.find(params[:user_id])
+    order = @user.orders.where.has {orderStatus == 'pending'}.first
+    @cart = OrderItem.all.where(order_id: order.id)
+
+  end
+
   def add
     item = Item.find(params[:item_id])
     user = User.find(params[:user_id])

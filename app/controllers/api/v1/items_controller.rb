@@ -65,7 +65,7 @@ class Api::V1::ItemsController < Api::V1::BaseController
 
   private
   def item_params
-    params.permit(:branches, :colors, :categories, :itemdescription, :itemPhoto, :photo_cache, :itemmodel, :itemsize, :itemstockqty, :itemprice)
+    params.permit(:branches, :colors, :categories, :itemdescription, :itemphoto, :photo_cache, :itemmodel, :itemsize, :itemstockqty, :itemprice)
   end
 
 

@@ -13,5 +13,6 @@ class Api::V1::UsersController < Api::V1::BaseController
   def show
     @user = User.find(params[:id])
     @orders = @user.orders.where.has {orderStatus == 'pending'}
+    # @items = @orders.items.join(@orders.has_items)
   end
 end

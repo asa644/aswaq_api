@@ -10,5 +10,5 @@ class Item < ApplicationRecord
   has_many :color_item
   has_many :colors, through: :color_item
 
-  mount_uploader :itemPhoto, PhotoUploader
+  mount_uploader :itemphoto, PhotoUploader
 end

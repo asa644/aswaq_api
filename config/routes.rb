@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
   root to: 'pages#home'
-
+  get 'check/:user_id/' => 'pages#check'
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :items, only: [ :index, :show, :update, :create, :delete ]
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
         post 'remove/:user_id/:item_id', to: 'orders#remove'
         post 'add/:user_id/:item_id' => 'orders#add'
         get 'check/:item_id/:order_id' => 'orders#check'
-
+        get 'cart/:user_id/' => 'orders#cart'
       # resource :orders, only: [:show, :index] do
       #   put 'add/:item_id', to: 'orders#add', as: :add_to
       #   put 'remove/:item_id', to: 'orders#remove', as: :remove_from
