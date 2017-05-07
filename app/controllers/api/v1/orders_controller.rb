@@ -21,7 +21,7 @@ class Api::V1::OrdersController < Api::V1::BaseController
     color = params[:color]
     quantity = params[:quantity]
     if quantity.to_i > item.itemstockqty
-      render json: { failed: 'ITEM QUANTITY SHOULD NOT BE MORE THAN ITEM STOCKQTY'}, status: :failed
+      render json: { failed: "There are only #{item.itemstockqty} left in stock"}, status: :failed
     else
       user.orders.first.items << item
       price = user.orders.first.orderInvoice + item.itemprice
