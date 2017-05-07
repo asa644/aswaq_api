@@ -10,7 +10,7 @@ class Api::V1::ItemsController < Api::V1::BaseController
     skip_authorization
     if params[:value] != nil
       if params[:date]!= nil
-      @items = Item.where("#{params[:search]} #{params[:sign]} ? AND created_at #{params[:datesign]} ?", params[:value], params[:date])
+      @items = Item.where("#{params[:search]} #{params[:sign]} ? AND created_at #{params[:datesign]} ?", params[:value], params[:date]).order(params[:search] => params[:AD])
       else
       @items = Item.where("#{params[:search]} #{params[:sign]} ?", params[:value])
       end
