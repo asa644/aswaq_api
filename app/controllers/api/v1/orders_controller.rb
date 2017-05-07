@@ -13,14 +13,17 @@ class Api::V1::OrdersController < Api::V1::BaseController
     @user = User.find(params[:user_id])
     order = @user.orders.where.has {orderStatus == 'pending'}.first
     @cart = OrderItem.all.where(order_id: order.id)
-
   end
 
   def add
     item = Item.find(params[:item_id])
     user = User.find(params[:user_id])
+    color = params[:color]
+    quantity = params[:quantity]
     user.orders.first.items << item
-    render json: { created: true}, status: :created
+    s = HasItem.where(item_id: params[:item_id], order_id: user.orders.first.id).first
+      s.update(quantity: params[:quantity], color: params[:color])
+      render json: { created: true}, status: :created
   end
 
   def remove

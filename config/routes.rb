@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       resources :branches, only: [ :index, :show, :update, :create, :delete ]
       resources :orders, only: [ :index, :show, :update, :create, :delete ]
         post 'remove/:user_id/:item_id', to: 'orders#remove'
-        post 'add/:user_id/:item_id' => 'orders#add'
+        post 'add/:user_id/:item_id/:color/:quantity' => 'orders#add'
         get 'check/:item_id/:order_id' => 'orders#check'
         get 'cart/:user_id/' => 'orders#cart'
       # resource :orders, only: [:show, :index] do
