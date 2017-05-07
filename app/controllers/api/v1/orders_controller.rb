@@ -14,7 +14,7 @@ class Api::V1::OrdersController < Api::V1::BaseController
     order = @user.orders.first
     @cart = OrderItem.where(order_id: order.id)
     if @cart.empty?
-      render json: { created: 'no items added to your bag', failed: false}, status: :created
+      render json: { created: 'mickymouse'}, status: :created
     end
   end
 
