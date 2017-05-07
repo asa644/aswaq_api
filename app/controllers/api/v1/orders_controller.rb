@@ -40,6 +40,9 @@ class Api::V1::OrdersController < Api::V1::BaseController
   def remove
     item = Item.find(params[:item_id])
     user = User.find(params[:user_id])
+    price = user.orders.first.orderInvoice - item.itemprice
+    user.orders.first.update(orderInvoice: price)
+
     user.orders.first.has_items.where(item_id: params[:item_id]).destroy_all
   end
   def create
