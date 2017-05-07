@@ -26,12 +26,17 @@ class Api::V1::OrdersController < Api::V1::BaseController
       user.orders.first.items << item
       price = user.orders.first.orderInvoice + item.itemprice
       user.orders.first.update(orderInvoice: price)
+      ss = HasItem.where(item_id: item.id, order_id: user.orders.first.id).update(color: color, quantity: quantity)
+      # raise 'eh'
+      # raise 'he'
       # order = user.orders.first
       # order.update(orderInvoice: order.orderInvoice+item.itemprice)
-      s = HasItem.where(item_id: params[:item_id], order_id: user.orders.first.id).first
-        s.update(quantity: params[:quantity], color: params[:color])
+      # s = HasItem.where(item_id: params[:item_id], order_id: user.orders.first.id).first
+      #   s.update(quantity: params[:quantity], color: params[:color])
         render json: { created: true}, status: :created
     end
+
+
   end
 
   def remove
